@@ -26,7 +26,7 @@ public class Employee {
         System.out.println(employees);
         employees.stream().collect(Collectors
                 .toMap(Employee::getFullName, Employee::getDepartment))
-                .forEach((name, department) -> System.out.println("Name: " + name + ", Department: " + department));
+                .forEach((name, department) -> System.out.println(String.format("Name: %s, Department: %s", name, department)));
     }
 
     public String getFullName() {

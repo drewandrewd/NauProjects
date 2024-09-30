@@ -5,15 +5,23 @@ import java.util.Queue;
 
 public class Fifth implements Task {
 
-    Queue<String> queue = new LinkedList<>();
-    boolean flag = true;
+    private final Queue<String> queue = new LinkedList<>();
+    private boolean flag = false;
+
     @Override
-    public void start() throws InterruptedException {
-        for (String curr : queue) {
-            if (flag) {
-                System.out.println(curr);
+    public void start() {
+        flag = true;
+
+        while (flag) {
+            if (!queue.isEmpty()) {
+                String curr = queue.poll();
+                System.out.println("Processing: " + curr);
             } else {
-                break;
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -30,5 +38,7 @@ public class Fifth implements Task {
         fifth.queue.add("c");
         fifth.queue.add("d");
         fifth.start();
+        Thread.sleep(5000);
+        fifth.stop();
     }
 }
